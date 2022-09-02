@@ -3,6 +3,9 @@ let main = document.querySelector(".btnsMain");
 let game = document.querySelector(".btnsGame");
 let word = document.querySelector(".btnsWord");
 
+//TEXTAREA
+let worngLetterTextarea = document.querySelector(".wrongLetters");
+
 //BOTONES
 let btnGame = document.getElementById('btnGame');
 let btnWord = document.getElementById('btnUseWord');
@@ -18,39 +21,41 @@ let wordScreen	= "Word";
 let gameFlag	= false;
 
 //JUEGO
-let palabras = ["HOLA", "CHAU", "HTML", "CSS", "JAVASCRIPT"];
-let palabraElegida;
+let words = ["HOLA", "CHAU", "HTML", "CSS", "JAVASCRIPT"];
+let chosenWord;
+let usedLetters = [];
 
 function changeScreen(screen){
 	if (screen == homeScreen) {
 		main.classList.toggle('noDisplay');
 		if (gameFlag)	game.classList.toggle('noDisplay');
-		else	word.classList.toggle('noDisplay');
-		gameFlag	= false;
+		else			word.classList.toggle('noDisplay');
+		gameFlag = false;
 	}
 	else if (screen == gameScreen) {
-		gameFlag	= true;
 		game.classList.toggle('noDisplay');
 		main.classList.toggle('noDisplay');
+		gameFlag = true;
 	}
 	else if (screen == wordScreen) {
-		gameFlag	= false;
 		word.classList.toggle('noDisplay');
 		main.classList.toggle('noDisplay');
+		gameFlag = false;
 	}
 }
 
 function createLineItems(length){
 	let container = document.querySelector(".wordLines");
 
-	for (var i = 0; i < palabraElegida.length; i++) {
+	for (var i = 0; i < chosenWord.length; i++) {
 		let lineItem = document.createElement("div");
 		lineItem.classList.toggle('lineItem');
 
 		let word = document.createElement("textarea");
 		word.classList.toggle('word');
 		word.readOnly = true;
-		word.value = palabraElegida[i];
+		word.value = chosenWord[i];
+		word.color = "white";
 
 		let line = document.createElement("div");
 		line.classList.toggle('line');
@@ -72,34 +77,72 @@ function changeToWordScreen(){
 }
 
 function changeToHomeScreen(){
-	let container = document.querySelector(".wordLines");
-	container.innerHTML = "";
+	if (gameFlag) {
+		let container = document.querySelector(".wordLines");
+		container.innerHTML = "";
+	}
+
 	changeScreen(homeScreen);
 }
 
 function start(){
-	let len = Math.floor((Math.random()*100) % palabras.length);
-	palabraElegida = palabras[len];
+	worngLetterTextarea.value = "";
+	let len = Math.floor((Math.random()*100) % words.length);
+	chosenWord = words[len];
 	createLineItems(len);
 }
 
 function restart(){
 	let container = document.querySelector(".wordLines");
 	container.innerHTML = "";
+	usedLetters = [];
 	start();
 }
 
 function checkKey(event){
 	event = event || window.event;
     if (gameFlag) {
-    	if (event.keyCode > 90 || event.keyCode < 65) return;
+    	//si no es letra me voy
+    	if (event.key < 'a' || event.key > 'z') return;
     	
-    	for (var i = 0; i < palabraElegida.length; i++) {
-			if (event.keyCode == palabraElegida.charCodeAt(i)) {
-				console.log("bien");
+    	//si ya la apreto me voy
+    	if (checkLetter(event.key)) return;
+    	
+    	//agrego la letra a las presionadas
+    	addUsedLetter(event.key);
+
+    	//compruebo si esta la letra en la palabra
+    	for (var i = 0; i < chosenWord.length; i++) {
+			if (event.key == chosenWord[i].toLowerCase()) {
+				show(event.key);
+				return;
 			}
 		}
+
+		addWrongLetter(event.key);
 	}
+}
+
+function show(letter){
+	let letras = document.querySelector(".wordLines").children;
+
+	for (var i = 0; i < chosenWord.length; i++) {
+		if (letter == letras[i].firstChild.value.toLowerCase()) {
+			letras[i].firstChild.style.color = "black";
+		}
+	}
+}
+
+function checkLetter(letter){
+	return usedLetters.includes(letter);
+}
+
+function addUsedLetter(letter){
+	if (!checkLetter(letter)) usedLetters.push(letter);
+}
+
+function addWrongLetter(letter){
+	worngLetterTextarea.value += " " + letter.toUpperCase();
 }
 
 btnGame.onclick = changeToGameScreen;

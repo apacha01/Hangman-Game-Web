@@ -62,7 +62,7 @@ button:hover{
 }
 
 .imageContainer{
-	height: 70%;
+	height: 60%;
 }
 
 .wordLines{
@@ -93,10 +93,14 @@ button:hover{
     border: none;
     text-align: center;
     font-size: 3em;
+    color: white;
 }
 
-.word:focus-visible, .word:active{
-	border: none;
+.word::selection{
+	color: white;
+}
+
+.word:focus-visible{
 	outline: none;
 }
 
@@ -107,7 +111,20 @@ button:hover{
 }
 
 
+.wrongLetters{
+	height: 100%;
+	width: 100%;
+	resize: none;
+	border: none;
+	text-align: center;
+	padding-top: 10px;
+	font-size: 1.5em;
+	color: grey;
+}
 
+.wrongLetters:focus-visible{
+	outline: none;
+}
 
 
 
