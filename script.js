@@ -1,20 +1,23 @@
 //DIVS
-var main = document.querySelector(".btnsMain");
-var game = document.querySelector(".btnsGame");
-var word = document.querySelector(".btnsWord");
+let main = document.querySelector(".btnsMain");
+let game = document.querySelector(".btnsGame");
+let word = document.querySelector(".btnsWord");
 
 //BOTONES
-var btnGame = document.getElementById('btnGame');
-var btnWord = document.getElementById('btnUseWord');
-var btnRestart = document.getElementById('btnRestart');
-var btnGiveUp = document.getElementById('btnGiveUp');
-var btnSaveWord = document.getElementById('btnSaveWord');
-var btnCancelWord = document.getElementById('btnCancelWord');
+let btnGame = document.getElementById('btnGame');
+let btnWord = document.getElementById('btnUseWord');
+let btnRestart = document.getElementById('btnRestart');
+let btnGiveUp = document.getElementById('btnGiveUp');
+let btnSaveWord = document.getElementById('btnSaveWord');
+let btnCancelWord = document.getElementById('btnCancelWord');
 
 //VARIABLES
-var homeScreen = "Home";
-var gameScreen = "Game";
-var wordScreen = "Word";
+let homeScreen = "Home";
+let gameScreen = "Game";
+let wordScreen = "Word";
+
+//JUEGO
+let palabras = ["HOLA", "CHAU", "HTML", "CSS", "JAVASCRIPT"];
 
 function changeScreen(screen){
 	if (screen == homeScreen) {
@@ -32,7 +35,31 @@ function changeScreen(screen){
 	}
 }
 
+function createLineItems(length){
+	let container = document.querySelector(".wordLines");
+
+	for (var i = 0; i < palabras[length].length; i++) {
+		let lineItem = document.createElement("div");
+		lineItem.classList.toggle('lineItem');
+
+		let word = document.createElement("textarea");
+		word.classList.toggle('word');
+		word.readOnly = true;
+
+		let line = document.createElement("div");
+		line.classList.toggle('line');
+
+		lineItem.appendChild(word);
+		lineItem.appendChild(line);
+
+		container.appendChild(lineItem);
+	}
+
+}
+
 function changeToGameScreen(){
+	let len = Math.floor((Math.random()*100) % palabras.length);
+	createLineItems(len);
 	changeScreen(gameScreen);
 }
 
@@ -41,6 +68,8 @@ function changeToWordScreen(){
 }
 
 function changeToHomeScreen(){
+	let container = document.querySelector(".wordLines");
+	container.innerHTML = "";
 	changeScreen(homeScreen);
 }
 

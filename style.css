@@ -1,5 +1,5 @@
 button{
-	width: 20%;
+	width: 25%;
 	padding: 15px 25px;
 	margin: 10px;
 	text-align: center;
@@ -12,6 +12,23 @@ button{
 button:hover{
 	cursor: pointer;
 	transform: scale(1.05);
+}
+
+.btnsMain, .btnsGame, .btnsWord{
+	width: 100%;
+	height: 97vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.noDisplay{
+	display: none;
+}
+
+.columna{
+	flex-direction: column;
 }
 
 .btnAlternate{
@@ -34,20 +51,90 @@ button:hover{
 	color: mediumblue;
 }
 
-.btnsMain, .btnsGame, .btnsWord{
-	width: 100%;
-	height: 97vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.btnGame{
+	width: 27%;
+	padding: 20px 30px;
+	font-size: 1.5em;
 }
 
-.noDisplay{
-	display: none;
+.btnsGame>div{
+	width: 100%;
 }
+
+.imageContainer{
+	height: 70%;
+}
+
+.wordLines{
+	height: 10%;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+}
+
+.usedWordsContainer{
+	height: 5%;
+}
+
+.lineItem{
+	width: 10%;
+	height: 100%;
+	display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.word{
+	width: 100%;
+    height: 85%;
+    resize: none;
+    border: none;
+    text-align: center;
+    font-size: 3em;
+}
+
+.word:focus-visible, .word:active{
+	border: none;
+	outline: none;
+}
+
+.line{
+	background-color: blue;
+	width: 100%;
+	height: 3px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media screen and (max-width: 685px){
 	button{
 		width: 40%;
+	}
+
+	.btnGame{
+		width: 42%;
 	}
 }
