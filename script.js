@@ -4,7 +4,7 @@ let game = document.querySelector(".btnsGame");
 let word = document.querySelector(".btnsWord");
 
 //TEXTAREA
-let worngLetterTextarea = document.querySelector(".wrongLetters");
+let wrongLetterTextarea = document.querySelector(".wrongLetters");
 
 //BOTONES
 let btnGame = document.getElementById('btnGame');
@@ -84,7 +84,7 @@ function changeToHomeScreen(){
 }
 
 function start(){
-	worngLetterTextarea.value = "";
+	wrongLetterTextarea.value = "";
 	let len = Math.floor((Math.random()*100) % words.length);
 	chosenWord = words[len];
 	createLineItems(len);
@@ -98,18 +98,18 @@ function restart(){
 function cleanGameScreen(){
 	let container = document.querySelector(".wordLines");
 	let menW = document.querySelector(".winner");
-	let menL = document.querySelector(".winner");
+	let menL = document.querySelector(".loser");
 	container.innerHTML = "";
 	usedLetters = [];
 	won = false;
 	lost = false;
 	menW.classList.add('noDisplay');
-	menW.classList.add('noDisplay');
+	menL.classList.add('noDisplay');
 }
 
 function checkKey(event){
 	event = event || window.event;
-    if (gameFlag && !won) {
+    if (gameFlag && !won && !lost) {
     	//si no es letra me voy
     	if (event.key < 'a' || event.key > 'z') return;
 
@@ -161,13 +161,13 @@ function addUsedLetter(letter){
 }
 
 function addWrongLetter(letter){
-	worngLetterTextarea.value += " " + letter.toUpperCase();
+	wrongLetterTextarea.value += " " + letter.toUpperCase();
 	showDoll();
-	if (worngLetterTextarea.value.length == 10) loser();
+	if (wrongLetterTextarea.value.length >= 20) loser();
 }
 
 function showDoll(){
-	
+
 }
 
 function winner(){
