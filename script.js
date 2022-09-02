@@ -24,6 +24,8 @@ let gameFlag	= false;
 let words = ["HOLA", "CHAU", "HTML", "CSS", "JAVASCRIPT"];
 let chosenWord;
 let usedLetters = [];
+let won = false;
+let lost = false;
 
 function changeScreen(screen){
 	if (screen == homeScreen) {
@@ -77,11 +79,7 @@ function changeToWordScreen(){
 }
 
 function changeToHomeScreen(){
-	if (gameFlag) {
-		let container = document.querySelector(".wordLines");
-		container.innerHTML = "";
-	}
-
+	if (gameFlag)	cleanGameScreen();
 	changeScreen(homeScreen);
 }
 
@@ -93,18 +91,28 @@ function start(){
 }
 
 function restart(){
+	cleanGameScreen();
+	start();
+}
+
+function cleanGameScreen(){
 	let container = document.querySelector(".wordLines");
+	let menW = document.querySelector(".winner");
+	let menL = document.querySelector(".winner");
 	container.innerHTML = "";
 	usedLetters = [];
-	start();
+	won = false;
+	lost = false;
+	menW.classList.add('noDisplay');
+	menW.classList.add('noDisplay');
 }
 
 function checkKey(event){
 	event = event || window.event;
-    if (gameFlag) {
+    if (gameFlag && !won) {
     	//si no es letra me voy
     	if (event.key < 'a' || event.key > 'z') return;
-    	
+
     	//si ya la apreto me voy
     	if (checkLetter(event.key)) return;
     	
@@ -115,6 +123,7 @@ function checkKey(event){
     	for (var i = 0; i < chosenWord.length; i++) {
 			if (event.key == chosenWord[i].toLowerCase()) {
 				show(event.key);
+				checkWord();
 				return;
 			}
 		}
@@ -124,13 +133,23 @@ function checkKey(event){
 }
 
 function show(letter){
-	let letras = document.querySelector(".wordLines").children;
+	let letters = document.querySelector(".wordLines").children;
 
 	for (var i = 0; i < chosenWord.length; i++) {
-		if (letter == letras[i].firstChild.value.toLowerCase()) {
-			letras[i].firstChild.style.color = "black";
+		if (letter == letters[i].firstChild.value.toLowerCase()) {
+			letters[i].firstChild.style.color = "black";
 		}
 	}
+}
+
+function checkWord(){
+	let letters = document.querySelector(".wordLines").children;
+	
+	for (var i = 0; i < chosenWord.length; i++) {
+		if (!(letters[i].firstChild.style.color == "black")) return;
+	}
+
+	winner();
 }
 
 function checkLetter(letter){
@@ -143,6 +162,24 @@ function addUsedLetter(letter){
 
 function addWrongLetter(letter){
 	worngLetterTextarea.value += " " + letter.toUpperCase();
+	showDoll();
+	if (worngLetterTextarea.value.length == 10) loser();
+}
+
+function showDoll(){
+	
+}
+
+function winner(){
+	let men = document.querySelector(".winner");
+	men.classList.remove('noDisplay');
+	won = true;
+}
+
+function loser(){
+	let men = document.querySelector(".loser");
+	men.classList.remove('noDisplay');
+	lost = true;
 }
 
 btnGame.onclick = changeToGameScreen;

@@ -63,6 +63,21 @@ button:hover{
 
 .imageContainer{
 	height: 60%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.winner, .loser{
+	width: 50%;
+	resize: none;
+	border: none;
+	text-align: center;
+	padding: 10% 0;
+}
+
+.winner:focus-visible, .loser:focus-visible{
+	outline: none;
 }
 
 .wordLines{
