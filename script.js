@@ -23,6 +23,7 @@ let gameFlag	= false;
 //JUEGO
 let words = ["HOLA", "CHAU", "HTML", "CSS", "JAVASCRIPT"];
 let chosenWord;
+let addedWord = "";
 let usedLetters = [];
 let won = false;
 let lost = false;
@@ -30,24 +31,26 @@ let counter = 0;
 
 function changeScreen(screen){
 	if (screen == homeScreen) {
-		main.classList.toggle('noDisplay');
-		if (gameFlag)	game.classList.toggle('noDisplay');
-		else			word.classList.toggle('noDisplay');
+		main.classList.remove('noDisplay');
+		game.classList.add('noDisplay');
+		word.classList.add('noDisplay');
 		gameFlag = false;
 	}
 	else if (screen == gameScreen) {
-		game.classList.toggle('noDisplay');
-		main.classList.toggle('noDisplay');
+		game.classList.remove('noDisplay');
+		main.classList.add('noDisplay');
+		word.classList.add('noDisplay');
 		gameFlag = true;
 	}
 	else if (screen == wordScreen) {
-		word.classList.toggle('noDisplay');
-		main.classList.toggle('noDisplay');
+		word.classList.remove('noDisplay');
+		main.classList.add('noDisplay');
+		game.classList.add('noDisplay');
 		gameFlag = false;
 	}
 }
 
-function createLineItems(length){
+function createLineItems(){
 	let container = document.querySelector(".wordLines");
 
 	for (var i = 0; i < chosenWord.length; i++) {
@@ -88,7 +91,10 @@ function start(){
 	wrongLetterTextarea.value = "";
 	let len = Math.floor((Math.random()*100) % words.length);
 	chosenWord = words[len];
-	createLineItems(len);
+
+	if (addedWord != "") chosenWord = addedWord;
+
+	createLineItems();
 }
 
 function restart(){
@@ -113,6 +119,8 @@ function cleanGameScreen(){
 		let show = document.querySelector("."+frame);
 		show.classList.add('noDisplay');
 	}
+
+	addedWord = "";
 }
 
 function checkKey(event){
@@ -193,11 +201,23 @@ function loser(){
 	lost = true;
 }
 
+function addWord(){
+	let readWord = document.querySelector(".readWord");
+
+	if (readWord.value.includes(" ")) {alert("Por favor ingrese una palabra sin espacios."); return;}
+	if (!words.includes(readWord.value))	words.push(readWord.value.toUpperCase());
+	
+	addedWord = readWord.value.toUpperCase();
+	changeToGameScreen();
+	readWord.value = "";
+}
+
 btnGame.onclick = changeToGameScreen;
 btnWord.onclick = changeToWordScreen;
 btnRestart.onclick = restart;
 btnGiveUp.onclick = changeToHomeScreen;
 btnCancelWord.onclick = changeToHomeScreen;
+btnSaveWord.onclick = addWord;
 
 document.onkeydown = checkKey;
 

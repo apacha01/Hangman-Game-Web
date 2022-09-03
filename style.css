@@ -36,7 +36,7 @@ button:hover{
 	color: white;
 }
 
-.btnAlternate:hover{
+.btnAlternate:hover, .btnAlternate:active{
 	background-color: darkblue;
 	border-color: midnightblue;
 }
@@ -46,7 +46,7 @@ button:hover{
 	color: midnightblue;
 }
 
-.btnBasic:hover{
+.btnBasic:hover, .btnBasic:active{
 	background-color: skyblue;
 }
 
@@ -238,8 +238,15 @@ button:hover{
 	outline: none;
 }
 
-
-
+.readWord{
+	width: 90%;
+	height: 500px;
+	resize: none;
+	border: 3px solid midnightblue;
+	border-radius: 15px;
+	padding: 10px;
+	font-size: 3em;
+}
 
 
 
@@ -265,6 +272,10 @@ button:hover{
 
 	.btnGame{
 		width: 42%;
+	}
+
+	.winner, .loser{
+		width: 30%;
 	}
 
 	.lineItem{
