@@ -1,10 +1,10 @@
 button{
-	width: 25%;
+	width: 20%;
 	padding: 15px 25px;
 	margin: 10px;
 	text-align: center;
 	border-radius: 25px;
-	border: 3px solid mediumblue;
+	border: 3px solid midnightblue;
 	transition: all 0.5s;
 	font-size: 1.15em;
 }
@@ -32,27 +32,26 @@ button:hover{
 }
 
 .btnAlternate{
-	background-color: mediumblue;
+	background-color: midnightblue;
 	color: white;
 }
 
 .btnAlternate:hover{
 	background-color: darkblue;
-	border-color: blue;
+	border-color: midnightblue;
 }
 
 .btnBasic{
 	background-color: aliceblue;
-	color: mediumblue;
+	color: midnightblue;
 }
 
 .btnBasic:hover{
 	background-color: skyblue;
-	color: mediumblue;
 }
 
 .btnGame{
-	width: 27%;
+	width: 22%;
 	padding: 20px 30px;
 	font-size: 1.5em;
 }
@@ -63,17 +62,115 @@ button:hover{
 
 .imageContainer{
 	height: 60%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image{
+	width: 295px;
+	height: 350px;
+	position: relative;
+}
+
+.frame{
+	position: absolute;
+	background-color: midnightblue;
+}
+
+.frame1{
+	width: 100%;
+	top: 100%;
+	height: 4.5px;
+}
+
+.frame2{
+	left: 80px;
+	width: 4.5px;
+	height: 100%;
+}
+
+.frame3{
+	left: 80px;
+	width: 175px;
+	height: 4.5px;
+}
+
+.frame4{
+	left: 255px;
+	height: 50px;
+	width: 4.5px;
+}
+
+.frame5{
+	top: 50px;
+	left: calc(255px - (63px/2) - 2.25px);
+	width: 63px;
+	height: 63px;
+	border: 4.5px solid midnightblue;
+	border-radius: 50%;
+	background-color: white;
+}
+
+.frame6{
+	top: 118.5px;
+	left: 255px;
+	height: 135px;
+	width: 4.5px;
+}
+
+.frame7{
+	top: 117px;
+	left: 235px;
+	height: 72px;
+	width: 4.5px;
+
+	transform: rotate(30deg);
+}
+
+.frame8{
+	top: 117px;
+	left: 275px;
+	height: 72px;
+	width: 4.5px;
+
+	transform: rotate(330deg);
+}
+
+.frame9{
+	top: 247px;
+	left: 237px;
+	height: 72px;
+	width: 4.5px;
+
+	transform: rotate(30deg);
+}
+
+.frame10{
+	top: 247px;
+	left: 273px;
+	height: 72px;
+	width: 4.5px;
+
+	transform: rotate(330deg);
 }
 
 .winner, .loser{
-	width: 50%;
+	position: absolute;
+	width: 10%;
+	padding-top: 15px;
 	resize: none;
 	border: none;
 	text-align: center;
-	padding: 10% 0;
+	color: white;
+}
+
+.winner{
+	background-color: green;
+}
+
+.loser{
+	background-color: red;
 }
 
 .winner:focus-visible, .loser:focus-visible{
@@ -81,7 +178,7 @@ button:hover{
 }
 
 .wordLines{
-	height: 10%;
+	height: 15%;
 	display: flex;
 	justify-content: center;
 	align-items: flex-end;
@@ -92,12 +189,12 @@ button:hover{
 }
 
 .lineItem{
-	width: 10%;
+	width: 48px;
 	height: 100%;
 	display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     margin: 0 10px;
 }
 
@@ -107,7 +204,7 @@ button:hover{
     resize: none;
     border: none;
     text-align: center;
-    font-size: 3em;
+    font-size: 4em;
     color: white;
 }
 
@@ -120,7 +217,7 @@ button:hover{
 }
 
 .line{
-	background-color: blue;
+	background-color: midnightblue;
 	width: 100%;
 	height: 3px;
 }
@@ -168,5 +265,14 @@ button:hover{
 
 	.btnGame{
 		width: 42%;
+	}
+
+	.lineItem{
+		justify-content: flex-end;
+	}
+
+	.word{
+		height: 35px;
+		font-size: 2em;
 	}
 }

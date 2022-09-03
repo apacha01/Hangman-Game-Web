@@ -26,6 +26,7 @@ let chosenWord;
 let usedLetters = [];
 let won = false;
 let lost = false;
+let counter = 0;
 
 function changeScreen(screen){
 	if (screen == homeScreen) {
@@ -105,6 +106,13 @@ function cleanGameScreen(){
 	lost = false;
 	menW.classList.add('noDisplay');
 	menL.classList.add('noDisplay');
+
+	counter = 0;
+	for (var i = 1; i <= 10; i++) {
+		let frame = "frame" + i;
+		let show = document.querySelector("."+frame);
+		show.classList.add('noDisplay');
+	}
 }
 
 function checkKey(event){
@@ -161,13 +169,16 @@ function addUsedLetter(letter){
 }
 
 function addWrongLetter(letter){
+	counter++;
 	wrongLetterTextarea.value += " " + letter.toUpperCase();
 	showDoll();
-	if (wrongLetterTextarea.value.length >= 20) loser();
+	if (counter >= 10) loser();
 }
 
 function showDoll(){
-
+	let frame = "frame" + counter;
+	let show = document.querySelector("."+frame);
+	show.classList.remove('noDisplay');
 }
 
 function winner(){
